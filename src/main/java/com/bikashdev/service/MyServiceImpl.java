@@ -1,4 +1,4 @@
-package com.lankydan.service;
+package com.bikashdev.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,5 +16,6 @@ public class MyServiceImpl implements MyService {
     LOGGER.info("doStuff took input - {}", value);
     LOGGER.warn("doStuff needed to warn - {}", value);
     LOGGER.error("doStuff encountered an error with value - {}", value);
+    System.out.print("\nlog ends heres");
   }
 }

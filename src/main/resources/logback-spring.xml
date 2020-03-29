@@ -11,30 +11,92 @@
   </appender>
 
   <appender name="SAVE-TO-FILE" class="ch.qos.logback.core.FileAppender">
-    <file>${LOG_DIR}/log.log</file>
+    <file>${LOG_DIR}/info.log</file>
     <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
       <Pattern>
         %d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n
       </Pattern>
     </encoder>
   </appender>
+  
+   <appender name="STDOUT1" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>
+        %d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger.%M - %msg%n
+      </pattern>
+    </encoder>
+  </appender>
 
-  <springProfile name="dev">
-    <root level="info">
+  <appender name="SAVE-TO-FILE1" class="ch.qos.logback.core.FileAppender">
+    <file>${LOG_DIR}/error.log</file>
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <Pattern>
+        %d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n
+      </Pattern>
+    </encoder>
+  </appender>
+  
+  <!-- <appender name="STDOUT2" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>
+        %d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger.%M - %msg%n
+      </pattern>
+    </encoder>
+  </appender>
+
+  <appender name="SAVE-TO-FILE2" class="ch.qos.logback.core.FileAppender">
+    <file>${LOG_DIR}/warn.log</file>
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <Pattern>
+        %d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n
+      </Pattern>
+    </encoder>
+  </appender>
+    <appender name="STDOUT3" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>
+        %d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger.%M - %msg%n
+      </pattern>
+    </encoder>
+  </appender>
+
+  <appender name="SAVE-TO-FILE3" class="ch.qos.logback.core.FileAppender">
+    <file>${LOG_DIR}/trace.log</file>
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <Pattern>
+        %d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n
+      </Pattern>
+    </encoder>
+  </appender> -->
+
+  <springProfile name="default">
+    <root level="debug">
       <appender-ref ref="STDOUT"/>
       <appender-ref ref="SAVE-TO-FILE"/>
     </root>
-    <logger name="com.lankydan.service.MyServiceImpl" additivity="false" level="debug">
+    <logger name="com.bikashdev.service.MyServiceImpl" additivity="false" level="debug">
       <appender-ref ref="STDOUT"/>
       <appender-ref ref="SAVE-TO-FILE"/>
     </logger>
+    <logger name="com.bikashdev.service.MyServiceImpl" additivity="false" level="error">
+      <appender-ref ref="STDOUT1"/>
+      <appender-ref ref="SAVE-TO-FILE1"/>
+    </logger>
+<!--      <logger name="com.bikashdev.service.MyServiceImpl" additivity="false" level="warn">
+      <appender-ref ref="STDOUT2"/>
+      <appender-ref ref="SAVE-TO-FILE2"/>
+    </logger>
+      <logger name="com.bikashdev.service.MyServiceImpl" additivity="false" level="trace">
+      <appender-ref ref="STDOUT3"/>
+      <appender-ref ref="SAVE-TO-FILE3"/>
+    </logger> -->
   </springProfile>
 
   <springProfile name="prod">
     <root level="info">
       <appender-ref ref="SAVE-TO-FILE"/>
     </root>
-    <logger name="com.lankydan.service.MyServiceImpl" additivity="false" level="error">
+    <logger name="com.bikashdev.service.MyServiceImpl" additivity="false" level="error">
       <appender-ref ref="SAVE-TO-FILE"/>
     </logger>
   </springProfile>
